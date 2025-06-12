@@ -1,10 +1,10 @@
 package org.example;
 
-public class Record {
+public class Person {
     private final String forename;
     private final String surname;
 
-    public Record(String forename, String surname) {
+    public Person(String forename, String surname) {
         this.forename = forename;
         this.surname = surname;
     }
