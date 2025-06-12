@@ -16,7 +16,7 @@ public class PersonFactory {
     public Person makePerson(Map<String, String> entry) {
         // TODO: Replace magic strings
         return switch(FORMAT) {
-            case "DS" -> switch(TYPE) {
+            case "TD" -> switch(TYPE) {
                 case "BIRTH" -> new Person(
                     entry.get("child's forname(s)"),
                     entry.get("child's surname")
