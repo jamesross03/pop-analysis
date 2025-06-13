@@ -75,7 +75,7 @@ public class FreqTable {
             counts.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())
                 .forEach(entry ->
-                    writer.writeNext(new String[]{entry.getKey(), entry.getValue().toString()});
+                    writer.writeNext(new String[]{entry.getKey(), entry.getValue().toString()})
                 );
         }
     }

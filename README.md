@@ -19,5 +19,5 @@ cd pop-analysis
 docker build . -t pop-analysis:latest
 
 # Run image
-docker run pop-analysis:latest
+docker run -v <path_to_record_file>:/app/<path_to_record_file> -v <path_to_results_dir>:/app/<path_to_results_dir> pop-analysis:latest <path_to_record_file>
 ```

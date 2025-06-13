@@ -33,7 +33,7 @@ public class Parser {
             
             while ((values = reader.readMap()) != null) {
                 Record r =  rf.makeRecord(values);
-                ir (r != null) list.add(r);
+                if (r != null) list.add(r);
             }
         }
 
