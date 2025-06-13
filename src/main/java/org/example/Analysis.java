@@ -12,10 +12,10 @@ public class Analysis {
         new File(c.resultsDir+"/tables").mkdirs();
 
         // TODO: Add error handling for missing arguments
-        List<Person> people = Parser.getAllLines(args[0], c.recordFormat, c.recordType);
+        List<Record> records = Parser.getAllLines(args[0], c.recordFormat, c.recordType);
 
         FreqTable table = new FreqTable(c.analysisType);
-        table.add(people);
+        table.add(records);
         table.output(c.resultsDir);
     }
 }

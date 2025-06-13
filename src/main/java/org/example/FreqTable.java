@@ -21,7 +21,7 @@ public class FreqTable {
     /**
      * Get function (static) for target field in record.
      */
-    private final Function<Person, String> keyExtractor;
+    private final Function<Record, String> keyExtractor;
 
     /**
      * Label for target field.
@@ -36,11 +36,11 @@ public class FreqTable {
         
         switch (type) {
             case Constants.FORENAME_FREQ -> {
-                keyExtractor = Person::getForenameStatic;
+                keyExtractor = Record::getForenameStatic;
                 label = "forename";
             }
             case Constants.SURNAME_FREQ -> {
-                keyExtractor = Person::getSurnameStatic;
+                keyExtractor = Record::getSurnameStatic;
                 label = "surname";
             }
             default -> throw new IllegalArgumentException("Unsupported type: " + type);
@@ -52,8 +52,8 @@ public class FreqTable {
      * 
      * @param records
      */
-    public void add(List<Person> records) {
-        for (Person r : records) {
+    public void add(List<Record> records) {
+        for (Record r : records) {
             String key = keyExtractor.apply(r);
             counts.put(key, counts.getOrDefault(key, 0) + 1);
         }

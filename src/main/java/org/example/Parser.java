@@ -24,9 +24,9 @@ public class Parser {
      * @throws IOException
      * @throws CsvValidationException
      */
-    public static List<Person> getAllLines(String filepath, String format, String type) throws IOException, CsvValidationException {
-        List<Person> list = new ArrayList<>();
-        PersonFactory rf = new PersonFactory(format, type);
+    public static List<Record> getAllLines(String filepath, String format, String type) throws IOException, CsvValidationException {
+        List<Record> list = new ArrayList<>();
+        RecordFactory rf = new RecordFactory(format, type);
 
         try (CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(filepath))) {
             Map<String, String> values;
