@@ -1,5 +1,10 @@
 package org.example;
 
+/**
+ * Contains configuration options for the pop-analysis program. Default options
+ * can be modified within this class and other attributes can be set at runtime
+ * using a configuration file. 
+ */
 public class Config {
     // TODO: Include defaults as static here
     public final String recordFormat = Constants.TD;
