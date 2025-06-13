@@ -4,3 +4,5 @@ syntax: glob
 target
 *.iml
 .vscode
+results
+src/main/resources/inputs/synthetic_3k

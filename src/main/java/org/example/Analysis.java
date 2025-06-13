@@ -1,11 +1,26 @@
 package org.example;
-import java.io.FileNotFoundException;
 
+import java.io.File;
+import java.util.List;
+
+/**
+ * Main class for Pop-Analysis.
+ */
 public class Analysis {
-    //TODO: Replace with a constant in a constants file rather than magic String
-    private static final String RECORD_FORMAT = "TD";
-
     public static void main(String[] args) throws Exception {
-        Parser.getAllLines("src/main/resources/inputs/synthetic_data-3k/birth_records.csv");
+        Config c = new Config();
+        new File(c.resultsDir+"/tables").mkdirs();
+
+        // TODO: Add error handling for missing arguments
+        try {
+            List<Record> records = Parser.getAllLines(args[0], c.recordFormat, c.recordType);
+
+            FreqTable table = new FreqTable(c.analysisType);
+            table.add(records);
+            table.output(c.resultsDir);
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

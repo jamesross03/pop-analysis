@@ -1,7 +1,7 @@
 # Pop-analysis
 Pop-analysis is a basic deployable containerised application for population data analysis, designed as a test for future population-linkage experiments. The focus of this is to create a portable image which can be easily deployed on a secure system and pointed towards a population dataset, with minimal setup.
 
-## Building from source
+## Building image from source
 To build pop-analysis from source, the following need to be installed:
 - Git
 - Java 21+
@@ -19,5 +19,5 @@ cd pop-analysis
 docker build . -t pop-analysis:latest
 
 # Run image
-docker run pop-analysis:latest
+docker run -v <path_to_record_file>:/app/<path_to_record_file> -v <path_to_results_dir>:/app/<path_to_results_dir> pop-analysis:latest <path_to_record_file>
 ```
