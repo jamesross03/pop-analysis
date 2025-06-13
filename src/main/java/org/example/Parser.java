@@ -30,8 +30,10 @@ public class Parser {
 
         try (CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(filepath))) {
             Map<String, String> values;
+            
             while ((values = reader.readMap()) != null) {
-                list.add(rf.makeRecord(values));
+                Record r =  rf.makeRecord(values);
+                ir (r != null) list.add(r);
             }
         }
 

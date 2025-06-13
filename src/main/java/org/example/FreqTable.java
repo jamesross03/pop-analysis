@@ -36,11 +36,11 @@ public class FreqTable {
         
         switch (type) {
             case Constants.FORENAME_FREQ -> {
-                keyExtractor = Record::getForenameStatic;
+                keyExtractor = Record::getForename;
                 label = "forename";
             }
             case Constants.SURNAME_FREQ -> {
-                keyExtractor = Record::getSurnameStatic;
+                keyExtractor = Record::getSurname;
                 label = "surname";
             }
             default -> throw new IllegalArgumentException("Unsupported type: " + type);
@@ -55,23 +55,28 @@ public class FreqTable {
     public void add(List<Record> records) {
         for (Record r : records) {
             String key = keyExtractor.apply(r);
-            counts.put(key, counts.getOrDefault(key, 0) + 1);
+            // Increments count by 1 or default to 1 if no value yet
+            counts.merge(key, 1, Integer::sum);
         }
     }
 
     /**
      * Outputs table to "<results_dir>/tables/<label>_freq.csv".
      * 
-     * @param results_dir
+     * @param resultsDir
      * @throws IOException
      */
-    public void output(String results_dir) throws IOException {
-        String output_fp = results_dir + "/tables/"+ label +"_freq.csv"; 
-        try (CSVWriter writer = new CSVWriter(new FileWriter(output_fp))) {
+    public void output(String resultsDir) throws IOException {
+        String filepath = resultsDir + "/tables/"+ label +"_freq.csv"; 
+
+        try (CSVWriter writer = new CSVWriter(new FileWriter(filepath))) {
             writer.writeNext(new String[]{Utils.capitalise(label), "Occurences"});
-            for (Map.Entry<String, Integer> entry : counts.entrySet()) {
-                writer.writeNext(new String[]{entry.getKey(), entry.getValue().toString()});
-            }
+            
+            counts.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .forEach(entry ->
+                    writer.writeNext(new String[]{entry.getKey(), entry.getValue().toString()});
+                );
         }
     }
 }

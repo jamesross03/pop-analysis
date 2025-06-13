@@ -12,24 +12,8 @@ public class Record {
         this.surname = surname;
     }
 
-    /**
-     * @param r Record
-     * @return forename
-     */
-    public static String getForenameStatic(Record r) {
-        return r.getForename();
-    }
-
     public String getForename() {
         return this.forename;
-    }
-
-    /**
-     * @param r Record
-     * @return surname
-     */
-    public static String getSurnameStatic(Record r) {
-        return r.getSurname();
     }
 
     public String getSurname() {
