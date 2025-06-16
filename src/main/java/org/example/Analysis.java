@@ -10,7 +10,7 @@ public class Analysis {
     public static void main(String[] args) throws Exception {
         try {
             Config c = new Config(args[0]);
-            new File(c.getResultsDir()+"/tables").mkdirs();
+            new File(c.getOutputDir()+"/tables").mkdirs();
 
             // TODO: Add error handling for missing arguments
 
@@ -18,7 +18,7 @@ public class Analysis {
 
             FreqTable table = new FreqTable(c.getAnalysisType());
             table.add(records);
-            table.output(c.getResultsDir());
+            table.output(c.getOutputDir());
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
