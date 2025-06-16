@@ -63,11 +63,11 @@ public class FreqTable {
     /**
      * Outputs table to "<results_dir>/tables/<label>_freq.csv".
      * 
-     * @param resultsDir
+     * @param outputDir
      * @throws IOException
      */
-    public void output(String resultsDir) throws IOException {
-        String filepath = resultsDir + "/tables/"+ label +"_freq.csv"; 
+    public void output(String outputDir) throws IOException {
+        String filepath = outputDir + "/tables/"+ label +"_freq.csv"; 
 
         try (CSVWriter writer = new CSVWriter(new FileWriter(filepath))) {
             writer.writeNext(new String[]{Utils.capitalise(label), "Occurences"});

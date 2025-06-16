@@ -17,6 +17,7 @@ public class Config {
     // ---- Default values ----
     private static final String DEFAULT_RESULTS_DIR = "results";
     private static final String DEFAULT_ANALYSIS_TYPE = Constants.SURNAME_FREQ;
+    private static final String DEFAULT_PURPOSE = "default";
     
     // ---- Required Parameters ----
     private String recordsFilepath;
@@ -27,11 +28,16 @@ public class Config {
     // TODO: Make this some form of list to perform multiple operations
     private String analysisType = DEFAULT_ANALYSIS_TYPE;
     private String resultsDir = DEFAULT_RESULTS_DIR;
+    private String purpose = DEFAULT_PURPOSE;
+
+    // ---- Set automatically at runtime ----
+    private String outputDir;
 
     public Config(String recordsFilepath, String recordType, String recordFormat) {
         this.recordsFilepath = recordsFilepath;
         this.recordType = recordType;
         this.recordFormat = recordFormat;
+        this.outputDir = generateOutputFilepath();
         
         validateArgs();
     }
@@ -41,6 +47,7 @@ public class Config {
         List<String> lines = ConfigFileParser.getAllLines(configFilepath);
         processArgs(lines, processors);
         validateArgs();
+        this.outputDir = generateOutputFilepath();
     }
 
     private Map<String, BiConsumer<Config, String>> getProcessors() {
@@ -52,6 +59,7 @@ public class Config {
         processors.put(Constants.RECORDS_TYPE_KEY, Config::setRecordType);
         processors.put(Constants.ANALYSIS_TYPE_KEY, Config::setAnalysisType);
         processors.put(Constants.RESULTS_FILEPATH_KEY, Config::setResultsDir);
+        processors.put(Constants.PURPOSE_KEY, Config::setPurpose);
 
         return processors;
         
@@ -77,7 +85,7 @@ public class Config {
                 throw new IllegalArgumentException("`" + key + "` is not a recognised option");
             }
 
-            processors.get(key).accept(this, value);
+            processor.accept(this, value);
         }
     }
 
@@ -100,6 +108,10 @@ public class Config {
         if (!Arrays.asList(Constants.ANALYSIS_OPS).contains(analysisType)) {
             throw new IllegalArgumentException("Unrecognised analysis type: `" + analysisType + "`");
         }
+    }
+
+    private String generateOutputFilepath() {
+        return resultsDir + "/" + purpose + "/" + Utils.getDateTimeString();
     }
 
     public String getRecordType() {
@@ -134,11 +146,15 @@ public class Config {
         this.analysisType = analysisType;
     }
 
-    public String getResultsDir() {
-        return resultsDir;
-    }
-
     public void setResultsDir(String resultsDir) {
         this.resultsDir = resultsDir;
+    }
+
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
+
+    public String getOutputDir() {
+        return outputDir;
     }
 }
