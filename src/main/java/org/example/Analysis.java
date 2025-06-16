@@ -8,16 +8,17 @@ import java.util.List;
  */
 public class Analysis {
     public static void main(String[] args) throws Exception {
-        Config c = new Config();
-        new File(c.resultsDir+"/tables").mkdirs();
-
-        // TODO: Add error handling for missing arguments
         try {
-            List<Record> records = Parser.getAllLines(args[0], c.recordFormat, c.recordType);
+            Config c = new Config(args[0]);
+            new File(c.getResultsDir()+"/tables").mkdirs();
 
-            FreqTable table = new FreqTable(c.analysisType);
+            // TODO: Add error handling for missing arguments
+
+            List<Record> records = Parser.getAllLines(c.getRecordsFilepath(), c.getRecordFormat(), c.getRecordType());
+
+            FreqTable table = new FreqTable(c.getAnalysisType());
             table.add(records);
-            table.output(c.resultsDir);
+            table.output(c.getResultsDir());
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
             e.printStackTrace();

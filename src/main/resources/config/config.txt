@@ -1,0 +1,4 @@
+# Example default config
+
+## Required Parameters
+records_location=./src/main/resources/inputs/synthetic_3k/
