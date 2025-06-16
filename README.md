@@ -19,7 +19,9 @@ cd pop-analysis
 docker build . -t pop-analysis:latest
 
 # Run image
-docker run -v <path_to_record_file>:/app/<path_to_record_file> -v <path_to_results_dir>:/app/<path_to_results_dir> pop-analysis:latest <path_to_record_file>
+docker run -v <path_to_resources_dir>:/app/<path_to_resources_file> -v <path_to_results_dir>:/app/<path_to_results_dir> pop-analysis:latest <path_to_config_file>
 ```
 
-Note: paths must be absolute, not relative
+Note:
+- Paths must be absolute, not relative
+- Assume filepath of record (defined in config file) is within the resources directory, otherwise this will also have to be mounted separately
