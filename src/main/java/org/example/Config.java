@@ -59,13 +59,25 @@ public class Config {
     
     private void processArgs(List<String> lines, Map<String, BiConsumer<Config, String>> processors) {
         String[] parts;
+        String key;
         String value;
+        BiConsumer<Config, String> processor;
 
         for (String ln : lines) {
             parts = ln.split("=");
+
+            if (parts.length == 1) {
+                throw new IllegalArgumentException("Malformed config line: `" + ln + "`. Expected format: key=value");
+            }
+
+            key = parts[0].trim();
             value = String.join("=", Arrays.copyOfRange(parts, 1, parts.length)).trim();
-            processors.get(parts[0].trim()).accept(this, value);
-            // TODO: Catch invalid args
+
+            if ((processor = processors.get(key)) == null) {
+                throw new IllegalArgumentException("`" + key + "` is not a recognised option");
+            }
+
+            processors.get(key).accept(this, value);
         }
     }
 
