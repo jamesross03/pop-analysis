@@ -1,4 +1,6 @@
 # Example default config
 
 ## Required Parameters
-records_location=./src/main/resources/inputs/synthetic_3k/
+records_location = ./src/main/resources/inputs/synthetic_3k/birth_records.csv
+record_format = TD
+record_type = BIRTH

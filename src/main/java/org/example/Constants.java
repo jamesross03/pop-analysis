@@ -24,7 +24,7 @@ public class Constants {
     // ---- Config files ----
     public static final String RECORDS_FILEPATH_KEY = "records_location";
     public static final String RECORDS_FORMAT_KEY = "record_format";
-    public static final String RECORDS_TYPE_KEY = "records_type";
+    public static final String RECORDS_TYPE_KEY = "record_type";
     public static final String ANALYSIS_TYPE_KEY = "analysis";
     public static final String RESULTS_FILEPATH_KEY = "results_save_location";
     /** Comment-indicator for config file */
