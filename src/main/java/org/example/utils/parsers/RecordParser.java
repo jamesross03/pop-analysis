@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.example.utils.RecordFactory;
+import org.example.Config;
 import org.example.utils.Record;
 
 import uk.ac.standrews.cs.utilities.TimeManipulation;
@@ -24,21 +25,19 @@ public class RecordParser {
     /**
      * Reads all lines from an input file into objects.
      * 
-     * @param filepath 
-     * @param format record format
-     * @param type record type
+     * @param config 
      * @return List of Records
      * @throws IOException
      * @throws CsvValidationException
      */
-    public static List<Record> getAllLines(String filepath, String format, String type) throws IOException, CsvValidationException {
+    public static List<Record> getAllLines(Config config) throws IOException, CsvValidationException {
         final long START_TIME = System.currentTimeMillis();
         List<Record> list = new ArrayList<>();
-        RecordFactory rf = new RecordFactory(format, type);
+        RecordFactory rf = new RecordFactory(config);
 
-        try (CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(filepath))) {
+        try (CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(config.getRecordsFilepath()))) {
             Map<String, String> values;
-            Diagnostic.traceNoSource("Reading records from " + Paths.get(filepath));
+            Diagnostic.traceNoSource("Reading records from " + Paths.get(config.getRecordsFilepath()));
             
             while ((values = reader.readMap()) != null) {
                 Record r =  rf.makeRecord(values);

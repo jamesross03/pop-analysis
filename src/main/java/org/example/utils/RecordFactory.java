@@ -2,6 +2,7 @@ package org.example.utils;
 
 import java.util.Map;
 
+import org.example.Config;
 import org.example.Constants;
 
 /**
@@ -13,9 +14,12 @@ public class RecordFactory {
     private final String format;
     private final String type;
 
-    public RecordFactory(String format, String type) {
-        this.format = format;
-        this.type = type;
+    /**
+     * @param config Config object (defines record format and type)
+     */
+    public RecordFactory(Config config) {
+        this.format = config.getRecordFormat();
+        this.type = config.getRecordType();
     }
 
     /**
