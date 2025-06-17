@@ -19,10 +19,11 @@ public class Analysis {
         try {
             if (args.length > 1) throw new IllegalArgumentException("No config file given as CLI arg");
 
-            Config c = new Config(args[0]);
+            String configFilepath = args[0];
+            Config c = new Config(configFilepath);
             new File(c.getOutputDir()+"/tables").mkdirs();
 
-            System.out.println("Running analysis with " + Paths.get(args[0]).toAbsolutePath());
+            System.out.println("Running analysis with " + Paths.get(configFilepath).toAbsolutePath());
             runAnalysis(c);
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
