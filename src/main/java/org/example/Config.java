@@ -2,13 +2,14 @@ package org.example;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-import org.example.utils.Utils;
 import org.example.utils.parsers.ConfigFileParser;
 
 /**
@@ -114,9 +115,14 @@ public class Config {
     }
 
     private String generateOutputFilepath() {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
+        String datetime = now.format(formatter);
+        datetime += "-" + String.format("%03d", now.getNano() / 1_000_000);
+
         return new StringBuilder(resultsDir)
         .append("/" + purpose)
-        .append("/" + Utils.getDateTimeString())
+        .append("/" + datetime)
         .toString();
     }
 

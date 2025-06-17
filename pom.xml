@@ -17,7 +17,7 @@
                 <configuration>
                     <archive>
                     <manifest>
-                        <mainClass>org.example.Analysis</mainClass>
+                        <mainClass>org.example.analysis.Analysis</mainClass>
                     </manifest>
                     </archive>
                     <descriptorRefs>
