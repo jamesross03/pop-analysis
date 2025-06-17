@@ -5,7 +5,7 @@ package org.example;
  * values).
  */
 public class Constants {
-    // ---- Record formats ----
+    // ---- Record formats ---- 
     public static final String TD = "TD";
     /** List of permitted record formats */
     public static final String[] FORMATS = new String[]{TD};
@@ -23,8 +23,8 @@ public class Constants {
 
     // ---- Config files ----
     public static final String RECORDS_FILEPATH_KEY = "records_location";
-    public static final String RECORDS_FORMAT_KEY = "record_format";
-    public static final String RECORDS_TYPE_KEY = "record_type";
+    public static final String RECORD_FORMAT_KEY = "record_format";
+    public static final String RECORD_TYPE_KEY = "record_type";
     public static final String ANALYSIS_TYPE_KEY = "analysis";
     public static final String RESULTS_FILEPATH_KEY = "results_save_location";
     public static final String PURPOSE_KEY = "purpose";

@@ -1,4 +1,4 @@
-package org.example;
+package org.example.analysis;
 
 import java.io.File;
 import java.nio.file.Paths;
