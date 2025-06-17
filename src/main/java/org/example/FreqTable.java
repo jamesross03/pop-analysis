@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.function.Function;
 
 import com.opencsv.CSVWriter;
+import uk.ac.standrews.cs.utilities.TimeManipulation;
+import uk.ac.standrews.cs.utilities.archive.Diagnostic;
 
 /**
  * Generates a table of frequency values for a field in a record.
@@ -53,11 +55,16 @@ public class FreqTable {
      * @param records
      */
     public void add(List<Record> records) {
+        final long START_TIME = System.currentTimeMillis();
+        Diagnostic.traceNoSource("Adding records to "+label+" frequency table");
+
         for (Record r : records) {
             String key = keyExtractor.apply(r);
             // Increments count by 1 or default to 1 if no value yet
             counts.merge(key, 1, Integer::sum);
         }
+
+        TimeManipulation.reportElapsedTime(START_TIME);
     }
 
     /**
@@ -67,9 +74,11 @@ public class FreqTable {
      * @throws IOException
      */
     public void output(String outputDir) throws IOException {
+        final long START_TIME = System.currentTimeMillis();
         String filepath = outputDir + "/tables/"+ label +"_freq.csv"; 
 
         try (CSVWriter writer = new CSVWriter(new FileWriter(filepath))) {
+            Diagnostic.traceNoSource("Outputting "+label+" frequency table");
             writer.writeNext(new String[]{Utils.capitalise(label), "Occurences"});
             
             counts.entrySet().stream()
@@ -78,5 +87,7 @@ public class FreqTable {
                     writer.writeNext(new String[]{entry.getKey(), entry.getValue().toString()})
                 );
         }
+
+        TimeManipulation.reportElapsedTime(START_TIME);
     }
 }

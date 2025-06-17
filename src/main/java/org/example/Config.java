@@ -111,7 +111,10 @@ public class Config {
     }
 
     private String generateOutputFilepath() {
-        return resultsDir + "/" + purpose + "/" + Utils.getDateTimeString();
+        return new StringBuilder(resultsDir)
+        .append("/" + purpose)
+        .append("/" + Utils.getDateTimeString())
+        .toString();
     }
 
     public String getRecordType() {
