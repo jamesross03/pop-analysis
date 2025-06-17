@@ -1,4 +1,4 @@
-package org.example;
+package org.example.utils;
 
 /**
  * Basic generic class for Records, only stores forename and surname.

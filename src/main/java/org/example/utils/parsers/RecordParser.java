@@ -1,4 +1,4 @@
-package org.example;
+package org.example.utils.parsers;
 
 import com.opencsv.CSVReaderHeaderAware;
 import com.opencsv.exceptions.CsvValidationException;
@@ -9,32 +9,35 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import org.example.utils.RecordFactory;
+import org.example.Config;
+import org.example.utils.Record;
+
 import uk.ac.standrews.cs.utilities.TimeManipulation;
 import uk.ac.standrews.cs.utilities.archive.Diagnostic;
 
 /**
  * Parser for record input files.
  */
-public class Parser {
+public class RecordParser {
     // TODO: Consider an option of this which facilitates async execution (processing entries as they are received rather than in-order)
     /**
      * Reads all lines from an input file into objects.
      * 
-     * @param filepath 
-     * @param format record format
-     * @param type record type
+     * @param config 
      * @return List of Records
      * @throws IOException
      * @throws CsvValidationException
      */
-    public static List<Record> getAllLines(String filepath, String format, String type) throws IOException, CsvValidationException {
+    public static List<Record> getAllLines(Config config) throws IOException, CsvValidationException {
         final long START_TIME = System.currentTimeMillis();
         List<Record> list = new ArrayList<>();
-        RecordFactory rf = new RecordFactory(format, type);
+        RecordFactory rf = new RecordFactory(config);
 
-        try (CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(filepath))) {
+        try (CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(config.getRecordsFilepath()))) {
             Map<String, String> values;
-            Diagnostic.traceNoSource("Reading records from " + Paths.get(filepath));
+            Diagnostic.traceNoSource("Reading records from " + Paths.get(config.getRecordsFilepath()));
             
             while ((values = reader.readMap()) != null) {
                 Record r =  rf.makeRecord(values);

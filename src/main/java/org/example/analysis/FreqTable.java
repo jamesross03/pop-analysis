@@ -1,4 +1,4 @@
-package org.example;
+package org.example.analysis;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,6 +8,12 @@ import java.util.Map;
 import java.util.function.Function;
 
 import com.opencsv.CSVWriter;
+
+import org.example.utils.Utils;
+import org.example.Config;
+import org.example.Constants;
+import org.example.utils.Record;
+
 import uk.ac.standrews.cs.utilities.TimeManipulation;
 import uk.ac.standrews.cs.utilities.archive.Diagnostic;
 
@@ -31,11 +37,17 @@ public class FreqTable {
     private final String label;
 
     /**
-     * @param type defines target field
+     * Filepath to output results to.
      */
-    public FreqTable(String type) {
+    private final String resultsFilepath;
+
+    /**
+     * @param config Config object (defines analysis type and output location)
+     */
+    public FreqTable(Config config) {
         counts = new HashMap<>();
         
+        String type = config.getRecordType();
         switch (type) {
             case Constants.FORENAME_FREQ -> {
                 keyExtractor = Record::getForename;
@@ -47,6 +59,11 @@ public class FreqTable {
             }
             default -> throw new IllegalArgumentException("Unsupported type: " + type);
         };
+
+        resultsFilepath = new StringBuilder(config.getOutputDir())
+            .append("/tables/")
+            .append(label +"_freq.csv")
+            .toString(); 
     }
 
     /**
@@ -70,15 +87,13 @@ public class FreqTable {
     /**
      * Outputs table to "<results_dir>/tables/<label>_freq.csv".
      * 
-     * @param outputDir
      * @throws IOException
      */
-    public void output(String outputDir) throws IOException {
+    public void output() throws IOException {
         final long START_TIME = System.currentTimeMillis();
-        String filepath = outputDir + "/tables/"+ label +"_freq.csv"; 
 
-        try (CSVWriter writer = new CSVWriter(new FileWriter(filepath))) {
-            Diagnostic.traceNoSource("Outputting "+label+" frequency table");
+        try (CSVWriter writer = new CSVWriter(new FileWriter(resultsFilepath))) {
+            Diagnostic.traceNoSource("Outputting " + label + " frequency table");
             writer.writeNext(new String[]{Utils.capitalise(label), "Occurences"});
             
             counts.entrySet().stream()
