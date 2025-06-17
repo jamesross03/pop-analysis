@@ -1,6 +1,8 @@
-package org.example;
+package org.example.utils;
 
 import java.util.Map;
+
+import org.example.Constants;
 
 /**
  * Factory class for making Record objects from a line of CSV input. 

@@ -4,6 +4,9 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.util.List;
 
+import org.example.utils.Record;
+import org.example.utils.parsers.RecordParser;
+
 /**
  * Main class for Pop-Analysis.
  */
@@ -17,7 +20,7 @@ public class Analysis {
 
             // TODO: Add error handling for missing arguments
 
-            List<Record> records = Parser.getAllLines(c.getRecordsFilepath(), c.getRecordFormat(), c.getRecordType());
+            List<Record> records = RecordParser.getAllLines(c.getRecordsFilepath(), c.getRecordFormat(), c.getRecordType());
 
             FreqTable table = new FreqTable(c.getAnalysisType());
             table.add(records);
