@@ -1,6 +1,7 @@
 package org.example;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -11,6 +12,8 @@ public class Analysis {
         try {
             Config c = new Config(args[0]);
             new File(c.getOutputDir()+"/tables").mkdirs();
+
+            System.out.println("Running analysis with " + Paths.get(args[0]).toAbsolutePath());
 
             // TODO: Add error handling for missing arguments
 

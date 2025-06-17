@@ -5,9 +5,12 @@ import com.opencsv.exceptions.CsvValidationException;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import uk.ac.standrews.cs.utilities.TimeManipulation;
+import uk.ac.standrews.cs.utilities.archive.Diagnostic;
 
 /**
  * Parser for record input files.
@@ -25,16 +28,20 @@ public class Parser {
      * @throws CsvValidationException
      */
     public static List<Record> getAllLines(String filepath, String format, String type) throws IOException, CsvValidationException {
+        final long START_TIME = System.currentTimeMillis();
         List<Record> list = new ArrayList<>();
         RecordFactory rf = new RecordFactory(format, type);
 
         try (CSVReaderHeaderAware reader = new CSVReaderHeaderAware(new FileReader(filepath))) {
             Map<String, String> values;
+            Diagnostic.traceNoSource("Reading records from " + Paths.get(filepath));
             
             while ((values = reader.readMap()) != null) {
                 Record r =  rf.makeRecord(values);
                 if (r != null) list.add(r);
             }
+
+            TimeManipulation.reportElapsedTime(START_TIME);
         }
 
         return list;
