@@ -16,9 +16,12 @@ import com.opencsv.exceptions.CsvValidationException;
  */
 public class Analysis {
     public static void main(String[] args) throws Exception {
+        if (args.length < 1) {
+            System.out.println("No config file given as CLI arg \nExpected usage: pop-analysis <config-filepath>");
+            return;
+        }
+    
         try {
-            if (args.length < 1) throw new IllegalArgumentException("No config file given as CLI arg");
-
             String configFilepath = args[0];
             Config c = new Config(configFilepath);
             new File(c.getOutputDir()+"/tables").mkdirs();
