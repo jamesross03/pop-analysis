@@ -1,5 +1,5 @@
 # Running Pop-Analysis with Docker Guide
-This guide will provide a simple walkthrough of how to run the Pop-analysis application with Docker, using a released Docker image (for instructions on building your own, [see here](docker-build.md)).
+This guide will provide a simple walkthrough of how to run the Pop-analysis application with Docker, using a released Docker image (for instructions on building your own, see the [Docker build guide](../build/docker.md)).
 
 ## 1. Prerequisites
 The following tools must be installed on your system to follow this guide:
@@ -78,7 +78,7 @@ Elapsed time: 00:00:00
 Elapsed time: 00:00:00
 ```
 
-### 3.1 Results
+### 3.1. Results
 The results of the analysis, in this case a csv file containing counts of different surnames within the dataset, will be output to the `./results/` directory  The specific run will be located at a path like:
 
 ```
@@ -87,7 +87,12 @@ results/default/2025-06-18T13-45-29-345/
 
 Running with the above config file will generate a single results table within this at `tables/surname_freq.csv`.
 
-### 3.2 Configuration
+### 3.2. Notes on binding/mounting directories
+Some things to consider:
+- Paths must be absolute, not relative.
+- In above example, filepath of record (defined in config file) is within the resources directory. If not, this will also have to be mounted separately.
+
+### 3.3. Configuration
 The above instructions detail how to run with a basic example configuration file, which looks like:
 
 ```
@@ -99,4 +104,4 @@ record_format = TD
 record_type = BIRTH
 ```
 
-This can be edited to customise/tailor your run, using a number of available configuration options ([read more here](./config.md)).
+This can be edited to customise/tailor your run, using a number of available configuration options ([read more here](../config/index.md)).
