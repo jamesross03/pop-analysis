@@ -47,7 +47,7 @@ public class FreqTable {
     public FreqTable(Config config) {
         counts = new HashMap<>();
         
-        String type = config.getRecordType();
+        String type = config.getAnalysisType();
         switch (type) {
             case Constants.FORENAME_FREQ -> {
                 keyExtractor = Record::getForename;
