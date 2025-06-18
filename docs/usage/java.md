@@ -1,5 +1,5 @@
 # Running Pop-Analysis with Java Guide
-This guide will provide a simple walkthrough of how to run the Pop-analysis application with Java, using a released JAR file (for instructions on building your own, [see here](java-build.md)).
+This guide will provide a simple walkthrough of how to run the Pop-analysis application with Java, using a released JAR file (for instructions on building your own, see the [Java build guide](../build/java.md)).
 
 ## 1. Prerequisites
 The following tools must be installed on your system to follow this guide:
@@ -46,7 +46,7 @@ Expected usage: pop-analysis <config-filepath>
 ```
 
 ## 3. Running
-To run Pop-analysis using the default configuration file (which makes use of the "TD_5k" synthetic dataset), run the following command:
+To run Pop-analysis using the default configuration file (which makes use of the "TD_5k" synthetic dataset), run the following command (from within the root of the repository):
 
 ```shell
 # In a terminal (Windows/MacOs/Linux)
@@ -86,4 +86,4 @@ record_format = TD
 record_type = BIRTH
 ```
 
-This can be edited to customise/tailor your run, using a number of available configuration options ([read more here](./config.md)).
+This can be edited to customise/tailor your run, using a number of available configuration options ([read more here](../config/index.md)).

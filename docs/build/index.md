@@ -3,4 +3,4 @@ The following are instructions for how to build your own Java container or docke
 - [Docker](./docker.md)
 - [Java](./docker.md)
 
-Instructions for how to run and use the application (using released images/containers or ones generated using the above guides) can be found in [docs/usage](../usage/index.md).
+More detailed instructions for how to run and use the application (using released images/containers or ones generated using the above guides) can be found in [docs/usage](../usage/index.md), aswell as config options in the [configuration guide](docs/config/index.md).
