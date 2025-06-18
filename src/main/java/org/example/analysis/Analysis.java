@@ -17,7 +17,7 @@ import com.opencsv.exceptions.CsvValidationException;
 public class Analysis {
     public static void main(String[] args) throws Exception {
         try {
-            if (args.length > 1) throw new IllegalArgumentException("No config file given as CLI arg");
+            if (args.length < 1) throw new IllegalArgumentException("No config file given as CLI arg");
 
             String configFilepath = args[0];
             Config c = new Config(configFilepath);
