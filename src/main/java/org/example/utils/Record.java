@@ -1,5 +1,8 @@
-package org.example;
+package org.example.utils;
 
+/**
+ * Basic generic class for Records, only stores forename and surname.
+ */
 public class Record {
     private final String forename;
     private final String surname;

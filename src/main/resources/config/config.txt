@@ -1,0 +1,6 @@
+# Example default config
+
+## Required Parameters
+records_location = ./src/main/resources/inputs/TD_5k/birth_records.csv
+record_format = TD
+record_type = BIRTH
