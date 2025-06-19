@@ -22,6 +22,7 @@ public class Config {
     private static final String DEFAULT_RESULTS_DIR = "results";
     private static final String DEFAULT_ANALYSIS_TYPE = Constants.SURNAME_FREQ;
     private static final String DEFAULT_PURPOSE = "default";
+    private static final boolean DEFAULT_SIMULTANEOUS = false;
     
     // ---- Required Parameters ----
     /** Filepath to read records csv from */
@@ -39,6 +40,8 @@ public class Config {
     private String resultsDir = DEFAULT_RESULTS_DIR;
     /** Purpose of run (used for categorising results in results dir) */
     private String purpose = DEFAULT_PURPOSE;
+    /** Whether to run analysis and parsing simultaneously */
+    private boolean simultaneous = DEFAULT_SIMULTANEOUS;
 
     // ---- Set automatically at runtime ----
     /**
@@ -80,6 +83,7 @@ public class Config {
         processors.put(Constants.ANALYSIS_TYPE_KEY, Config::setAnalysisType);
         processors.put(Constants.RESULTS_FILEPATH_KEY, Config::setResultsDir);
         processors.put(Constants.PURPOSE_KEY, Config::setPurpose);
+        processors.put(Constants.SIMULTANEOUS_KEY, (config, s) -> config.setSimultaneous(Boolean.getBoolean(s)));
 
         return processors;
         
@@ -199,6 +203,14 @@ public class Config {
 
     public void setPurpose(String purpose) {
         this.purpose = purpose;
+    }
+
+    public boolean getSimultaneous() {
+        return simultaneous;
+    }
+
+    public void setSimultaneous(boolean simultaneous) {
+        this.simultaneous = simultaneous;
     }
 
     public String getOutputDir() {

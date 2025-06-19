@@ -42,6 +42,7 @@ public class Analysis {
      * @throws IOException
      */
     private static void runAnalysis(Config config) throws CsvValidationException, IOException {
+        // TODO: Implement usage of the simultaneous flag
         List<Record> records = RecordParser.getAllLines(config);
 
         FreqTable table = new FreqTable(config);

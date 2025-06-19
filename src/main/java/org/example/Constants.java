@@ -28,6 +28,7 @@ public class Constants {
     public static final String ANALYSIS_TYPE_KEY = "analysis";
     public static final String RESULTS_FILEPATH_KEY = "results_save_location";
     public static final String PURPOSE_KEY = "purpose";
+    public static final String SIMULTANEOUS_KEY = "simultaneous";
     /** Comment-indicator for config file */
     public static final String COMMENT_INDICATOR = "#";
 }

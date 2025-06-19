@@ -22,6 +22,7 @@ However, these can be edited/created from scratch to suit your needs.
 
 [Analysis options](#analysis-options):
 - [`analysis`](#analysis)
+- [`simultaneous`](#simultaneous)
 
 [Output options](#output-options):
 - [`result_save_location`](#result_save_location)
@@ -46,6 +47,13 @@ Analysis operation being performed on the records. Can be one of:
 - `SURNAME_FREQ` Generates a table of counts of different surnames
 
 Defaults to `SURNAME_FREQ`.
+
+#### `simultaneous`
+Whether to perform analysis operations and record-parsing simultaneously:
+- `TRUE`
+- `FALSE`
+
+Defaults to `FALSE`.
 
 ### Output options
 #### `result_save_location`
