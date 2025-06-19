@@ -32,11 +32,24 @@ jobs:
         JAR_FILE=$(find target -type f -name "*-jar-with-dependencies.jar" | head -n 1)
         mv "$JAR_FILE" target/pop-analysis-${{ github.event.release.tag_name }}.jar
 
-    - name: Upload JAR to GitHub Release
-      uses: actions/upload-release-asset@v1
+    - name: Upload JAR to GitHub Release (via @actions/github-script)
+      uses: actions/github-script@v7
       with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: ./target/pop-analysis-${{ github.event.release.tag_name }}.jar
-        asset_name: pop-analysis.jar
-        asset_content_type: application/java-archive
-
+        script: |
+          const fs = require('fs');
+          const path = 'target/pop-analysis-${{ github.event.release.tag_name }}.jar';
+          const stat = fs.statSync(path);
+          const releaseId = ${{ github.event.release.id }};
+          
+          const response = await github.rest.repos.uploadReleaseAsset({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            release_id: releaseId,
+            name: 'pop-analysis.jar',
+            data: fs.readFileSync(path),
+            headers: {
+              'content-type': 'application/java-archive',
+              'content-length': stat.size,
+            },
+          });
+          core.info(`Uploaded asset: ${response.data.browser_download_url}`);
