@@ -1,19 +1,26 @@
 package org.example;
 
+import java.util.Map;
+
+import com.github.jamesross03.pop_parser.utils.Record;
+import com.github.jamesross03.pop_parser.utils.RecordFormat;
+import com.github.jamesross03.pop_parser.utils.formats.TDFormat;
+import com.github.jamesross03.pop_parser.utils.records.BirthRecord;
+
 /**
  * Defines constants used throughout the program (e.g acceptable configuration 
  * values).
  */
 public class Constants {
     // ---- Record formats ---- 
-    public static final String TD = "TD";
-    /** List of permitted record formats */
-    public static final String[] FORMATS = new String[]{TD};
+    public static final Map<String, RecordFormat> FORMATS_MAP = Map.of(
+        "TD", new TDFormat()
+    );
 
     // ---- Record types ----
-    public static final String BIRTH = "BIRTH";
-    /** List of permitted record types */
-    public static final String[] TYPES = new String[]{BIRTH};
+    public static final Map<String, Class<? extends Record>> TYPES_MAP = Map.of(
+        "BIRTH", BirthRecord.class
+    );
 
     // ---- Analysis options ----
     public static final String FORENAME_FREQ = "FORENAME_FREQ";

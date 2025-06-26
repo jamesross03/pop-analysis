@@ -4,6 +4,9 @@ FROM maven:3.9.9-eclipse-temurin-21-jammy AS build
 # Set working directory inside the container
 WORKDIR /app
 
+# Add authentication settings for GitHub Packages
+COPY settings.xml /root/.m2/settings.xml
+
 # Copy pom.xml and download dependencies (cache layers)
 COPY pom.xml .
 RUN mvn dependency:go-offline

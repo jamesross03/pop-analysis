@@ -6,9 +6,15 @@
 
     <groupId>org.example</groupId>
     <artifactId>pop-analysis</artifactId>
-    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>pop-analysis</name>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <build>
         <plugins>
@@ -16,12 +22,12 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <archive>
-                    <manifest>
-                        <mainClass>org.example.analysis.Analysis</mainClass>
-                    </manifest>
+                        <manifest>
+                            <mainClass>org.example.analysis.Analysis</mainClass>
+                        </manifest>
                     </archive>
                     <descriptorRefs>
-                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
                 </configuration>
                 <executions>
@@ -37,6 +43,18 @@
         </plugins>
     </build>
 
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Maven Central</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/jamesross03/pop-parser</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>com.opencsv</groupId>
@@ -49,17 +67,18 @@
             <artifactId>utilities</artifactId>
             <version>1.0.0</version>
         </dependency>
-    </dependencies>
-    
-    <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 
-     <developers>
+        <!-- GitHub Packages Dependency -->
+        <dependency>
+            <groupId>com.github.jamesross03</groupId>
+            <artifactId>pop-parser</artifactId>
+            <version>1.1.0-alpha</version>
+        </dependency>
+    </dependencies>
+
+    <developers>
         <developer>
-            <id/>
+            <id>jamesross02</id>
             <name>James Ross</name>
             <email>jar35@st-andrews.ac.uk</email>
             <roles>
@@ -67,5 +86,4 @@
             </roles>
         </developer>
     </developers>
-
 </project>

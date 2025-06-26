@@ -7,20 +7,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
+import com.github.jamesross03.pop_parser.utils.Record;
+import com.github.jamesross03.pop_parser.utils.records.BirthRecord;
 import com.opencsv.CSVWriter;
 
 import org.example.utils.Utils;
 import org.example.Config;
 import org.example.Constants;
-import org.example.utils.Record;
 
 import uk.ac.standrews.cs.utilities.TimeManipulation;
 import uk.ac.standrews.cs.utilities.archive.Diagnostic;
 
 /**
- * Generates a table of frequency values for a field in a record.
+ * Generates a table of frequency values for a field in a record, where T is
+ * the Record class (e.g BirthRecord).
  */
-public class FreqTable {
+public class FreqTable <T extends Record>{
     /**
      * Stores <value, n occurences> pairs.
      */
@@ -48,13 +50,21 @@ public class FreqTable {
         counts = new HashMap<>();
         
         String type = config.getAnalysisType();
+        String recordType = config.getRecordType().getSimpleName();
         switch (type) {
             case Constants.FORENAME_FREQ -> {
-                keyExtractor = Record::getForename;
+                keyExtractor = switch (recordType) {
+                    case "BirthRecord" -> r -> ((BirthRecord) r).getForename();
+                    default -> throw new IllegalArgumentException("Unsupported record type: " + recordType);
+                };
                 label = "forename";
             }
             case Constants.SURNAME_FREQ -> {
-                keyExtractor = Record::getSurname;
+                keyExtractor = switch (recordType) {
+                    case "BirthRecord" -> r -> ((BirthRecord) r).getSurname();
+                    default -> throw new IllegalArgumentException("Unsupported record type: " + recordType);
+
+                };
                 label = "surname";
             }
             default -> throw new IllegalArgumentException("Unsupported type: " + type);
@@ -71,7 +81,7 @@ public class FreqTable {
      * 
      * @param records
      */
-    public void add(List<Record> records) {
+    public void add(List<T> records) {
         final long START_TIME = System.currentTimeMillis();
         Diagnostic.traceNoSource("Adding records to "+label+" frequency table");
 
