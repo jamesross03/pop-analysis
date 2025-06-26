@@ -21,8 +21,6 @@ if [ -n "$PRIVATE_KEY_RAW" ]; then
   chmod 600 "$KEY_PATH"
 
   echo "Private key rebuilt and ouput to $KEY_PATH"
-else
-  echo "Environment variable PRIVATE_KEY_RAW is not set. Skipping private key rebuild."
 fi
 
 # Run main entrypoint

@@ -28,4 +28,4 @@ COPY docker/rebuild_private_key.sh .
 COPY docker/entrypoint.sh .
 
 # Run the app
-ENTRYPOINT ["rebuild_private_key.sh", "./entrypoint.sh"]
+ENTRYPOINT ["./rebuild_private_key.sh", "./entrypoint.sh"]
