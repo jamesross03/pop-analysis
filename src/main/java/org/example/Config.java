@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-import org.example.utils.parsers.ConfigFileParser;
+import org.example.utils.ConfigFileParser;
 
 import com.github.jamesross03.pop_parser.utils.Record;
 import com.github.jamesross03.pop_parser.utils.RecordFormat;
