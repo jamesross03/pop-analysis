@@ -24,7 +24,8 @@ WORKDIR /app
 
 # Extract JAR file from build
 COPY --from=build /app/target/pop-analysis-1.0-SNAPSHOT-jar-with-dependencies.jar pop-analysis.jar
+COPY docker/rebuild_private_key.sh .
 COPY docker/entrypoint.sh .
 
 # Run the app
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["rebuild_private_key.sh", "./entrypoint.sh"]
