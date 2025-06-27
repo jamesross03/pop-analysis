@@ -4,7 +4,7 @@ Pop-analysis is a basic deployable containerised application for population data
 For more in-depth information, see [documentation](./docs/index.md).
 
 ## Running Pop-analysis
-Pop-analysis can be run from either a JAR file or a Docker container. Basic instructions for these can be found below, for more detailed instructions, see the [usage guides](docs/usage/index.md). Additionally, to build your own JAR files or docker images from the source code, see the [build guides](docs/build/index.md), and for configuration options, see the [configuration guide](docs/config/index.md)
+Pop-analysis can be run from either a JAR file or a Docker container. Basic instructions for these can be found below, for more detailed instructions (including how to securely load private keys into the application), see the [usage guides](docs/usage/index.md). Additionally to build your own JAR files or docker images from the source code, see the [build guides](docs/build/index.md), and for configuration options, see the [configuration guide](docs/config/index.md).
 
 ### Running using JAR file
 To run Pop-analysis from a JAR file using the default configuration file (which makes use of the "TD_5k" synthetic dataset), run the following command:
