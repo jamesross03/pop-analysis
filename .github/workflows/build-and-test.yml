@@ -14,6 +14,10 @@ on:
   pull_request:
     branches: ['main']
 
+env:
+  GITHUB_ACTOR: ${{ github.actor }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   build:
 
@@ -21,36 +25,27 @@ jobs:
 
     steps:
     - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-    # Create settings.xml for GitHub Packages authentication
-    - name: Create Maven settings.xml for GitHub Packages
-      run: |
-        mkdir -p ~/.m2
-        cat <<EOF > ~/.m2/settings.xml
-        <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
-                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
-                                      https://maven.apache.org/xsd/settings-1.0.0.xsd">
-          <servers>
-            <server>
-              <id>github</id>
-              <username>${{ github.actor }}</username>
-              <password>${{ secrets.GITHUB_TOKEN }}</password>
-            </server>
-          </servers>
-          <mirrors>
-            <mirror>
-              <id>github</id>
-              <mirrorOf>external:*</mirrorOf>
-              <url>https://maven.pkg.github.com/${{ github.repository_owner }}/</url>
-            </mirror>
-          </mirrors>
-        </settings>
-        EOF
     - name: Set up JDK 21
       uses: actions/setup-java@3b6c050358614dd082e53cdbc55580431fc4e437
       with:
         java-version: '21'
         distribution: 'corretto'
         cache: maven
+    - name: Configure GitHub Packages auth
+      run: |
+        mkdir -p ~/.m2
+        cat > ~/.m2/settings.xml <<EOF
+        <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+          <servers>
+            <server>
+              <id>github</id>
+              <username>${GITHUB_ACTOR}</username>
+              <password>${GITHUB_TOKEN}</password>
+            </server>
+          </servers>
+        </settings>
+        EOF
     - name: Build and test with Maven
       run: mvn -B package --file pom.xml
