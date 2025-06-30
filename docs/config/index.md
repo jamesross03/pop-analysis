@@ -34,6 +34,7 @@ Path to the records CSV file to analyse.
 #### `record_format` **\***
 Format of the target population records. Can be one of:
 - `TD` Custom record format created by [Tom Dalton](https://github.com/tomsdalton).
+- `UMEA` Record format used by the Swedish UMEA data.
 
 #### `record_type` **\***
 Type of records being analysed. Can be one of:
