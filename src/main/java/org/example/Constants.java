@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.github.jamesross03.pop_parser.utils.Record;
 import com.github.jamesross03.pop_parser.utils.RecordFormat;
-import com.github.jamesross03.pop_parser.utils.formats.TDFormat;
+import com.github.jamesross03.pop_parser.utils.formats.*;
 import com.github.jamesross03.pop_parser.utils.records.BirthRecord;
 
 /**
@@ -14,7 +14,8 @@ import com.github.jamesross03.pop_parser.utils.records.BirthRecord;
 public class Constants {
     // ---- Record formats ---- 
     public static final Map<String, RecordFormat> FORMATS_MAP = Map.of(
-        "TD", new TDFormat()
+        "TD", new TDFormat(),
+        "UMEA", new UMEAFormat()
     );
 
     // ---- Record types ----
