@@ -10,7 +10,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-import org.example.utils.parsers.ConfigFileParser;
+import org.example.utils.ConfigFileParser;
+
+import com.github.jamesross03.pop_parser.utils.Record;
+import com.github.jamesross03.pop_parser.utils.RecordFormat;
 
 /**
  * Contains configuration options for the pop-analysis program. Default options
@@ -26,10 +29,10 @@ public class Config {
     // ---- Required Parameters ----
     /** Filepath to read records csv from */
     private String recordsFilepath;
-    /** Type of record, e.g BIRTH, MARRIAGE, DEATH */
-    private String recordType;
+    /** Type of record, e.g Birth, Marriage, Death */
+    private Class<? extends Record> recordType;
     /** Record format, e.g DS or TD */
-    private String recordFormat;
+    private RecordFormat recordFormat;
 
     // ---- Optional Parameters ----
     // TODO: Make this some form of list to perform multiple operations
@@ -49,8 +52,8 @@ public class Config {
 
     public Config(String recordsFilepath, String recordType, String recordFormat) {
         this.recordsFilepath = recordsFilepath;
-        this.recordType = recordType;
-        this.recordFormat = recordFormat;
+        this.recordType = Constants.TYPES_MAP.get(recordType);
+        this.recordFormat = Constants.FORMATS_MAP.get(recordFormat);
         this.outputDir = generateOutputFilepath();
         
         validateArgs();
@@ -133,12 +136,6 @@ public class Config {
         if (recordFormat == null) {
             throw new IllegalArgumentException("`" + Constants.RECORD_TYPE_KEY + "` is required");
         }
-        if (!Arrays.asList(Constants.TYPES).contains(recordType)) {
-            throw new IllegalArgumentException("Unrecognised record type: `" + recordType + "`");
-        }
-        if (!Arrays.asList(Constants.FORMATS).contains(recordFormat)) {
-            throw new IllegalArgumentException("Unrecognised record format: `" + recordFormat + "`");
-        }
         if (!Arrays.asList(Constants.ANALYSIS_OPS).contains(analysisType)) {
             throw new IllegalArgumentException("Unrecognised analysis type: `" + analysisType + "`");
         }
@@ -161,12 +158,12 @@ public class Config {
             .toString();
     }
 
-    public String getRecordType() {
+    public Class<? extends Record> getRecordType() {
         return recordType;
     }
 
     public void setRecordType(String recordType) {
-        this.recordType = recordType;
+        this.recordType = Constants.TYPES_MAP.get(recordType);
     }
 
     public String getRecordsFilepath() {
@@ -177,12 +174,12 @@ public class Config {
         this.recordsFilepath = recordsFilepath;
     }
 
-    public String getRecordFormat() {
+    public RecordFormat getRecordFormat() {
         return recordFormat;
     }
 
     public void setRecordFormat(String recordFormat) {
-        this.recordFormat = recordFormat;
+        this.recordFormat = Constants.FORMATS_MAP.get(recordFormat);
     }
 
     public String getAnalysisType() {
