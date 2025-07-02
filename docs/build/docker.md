@@ -1,10 +1,10 @@
 # Building Pop-Analysis Docker from source
-This guide will provide a walkthrough of how to build a JAR file from the Pop-analysis source (for instructions on using a released image, see the [Docker usage guide](../usage/docker.md)).
+This guide will provide a walkthrough of how to build a Docker image from the Pop-analysis source (for instructions on using a released image, see the [Docker usage guide](../usage/docker.md)).
 
 ## 1. Prerequisites
 The following tools must be installed on your system to follow this guide:
 - [Git](https://git-scm.com/)
-- [docker](https://www.docker.com/), [podman](https://podman.io/) or any other container management tool
+- [Docker](https://www.docker.com/), [Podman](https://podman.io/) or any other container management tool
 
 ## 2. Building the image
 ### 2.1. Installing the source
@@ -12,7 +12,6 @@ First, we will need to install the source from the [Pop-analysis repository](htt
 
 ```sh
 # In a terminal (Windows/macOS/Linux)
-
 git clone https://github.com/jamesross03/pop-analysis.git
 ```
 ### 2.2. Authenticate Github packages
@@ -40,11 +39,10 @@ Navigate into the repository installed in the previous step ([2.1](#21-installin
 docker build . -t pop-analysis:latest
 ```
 
-To verify that the image is working, navigate to the directory it is in and run the following command:
+To verify that the Docker image is successfully built, run:
 
 ```sh
 # In a terminal (Windows/MacOs/Linux)
-
 docker run pop-analysis:latest
 ```
 
@@ -56,9 +54,14 @@ Expected usage: pop-analysis <config-filepath>
 ```
 
 ## 3. Running
-To run Pop-analysis using this image and the default configuration file (which makes use of the "TD_5k" synthetic dataset), run the following command (still in the root of the installed repository):
+To run Pop-analysis using the default configuration file (which makes use of the "TD_5k" synthetic dataset), we will also need to link (mount) local directories from the repository to internal paths within the container. In this case:
+- `./src` to `/app/src`
+    - To access config file and input distributions
+- `./results` to `/app/results`
+    - To receive the results
+    - Note: Local directory `./results` must be created prior to execution
 
-Navigate to the root of the installed repository and run the following commands to bind these and run Pop-analysis:
+Run the following commands (from the root of the repository) to bind these and run Pop-analysis:
 ```sh
 # If './results' doesn't yet exist
 mkdir results
