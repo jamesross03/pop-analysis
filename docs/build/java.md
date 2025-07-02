@@ -41,14 +41,14 @@ Navigate into the repository installed in step ([2.1](#21-installing-the-source)
 mvn clean package
 ```
 
-This will create two JAR files in the `target/` directory but we will want to use the JAR file with dependencies, which will be named similar to `pop-analysis-x.x.x-SNAPSHOT-jar-with-dependencies.jar`
+This will create two JAR files in the `target/` directory but we will want to use the JAR file with dependencies, which will be named similar to `pop-analysis-<VERSION_NUMBER>-jar-with-dependencies.jar`
 
 To verify that the JAR file is working, navigate to the directory it is in and run the following command (adjusted for the correct file name):
 
 ```sh
 # In a terminal (Windows/MacOs/Linux)
 
-java -jar target/pop-analysis-x.x.x-SNAPSHOT-jar-with-dependencies.jar
+java -jar target/pop-analysis-<VERSION_NUMBER>-jar-with-dependencies.jar
 ```
 
 which should print the following message
@@ -64,7 +64,7 @@ To run Pop-analysis using this image and the default configuration file (which m
 ```shell
 # In a terminal (Windows/MacOs/Linux)
 
-java -jar pop-analysis-x.x.x-SNAPSHOT-jar-with-dependencies.jar src/main/resources/config/config.txt
+java -jar pop-analysis-<VERSION_NUMBER>-jar-with-dependencies.jar src/main/resources/config/config.txt
 ```
 
 This will produce output similar to the following (albeit with different timestamps):
