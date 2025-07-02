@@ -17,13 +17,18 @@ COPY src ./src
 # Build the jar (with dependencies)
 RUN mvn clean package assembly:single
 
+# Extract version from pom.xml
+RUN VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout) && \
+    echo "VERSION=$VERSION" && \
+    mv target/pop-analysis-${VERSION}-jar-with-dependencies.jar ./pop-analysis.jar
+    
 # Runtime image (smaller)
 FROM eclipse-temurin:21-jre
 
 WORKDIR /app
 
 # Extract JAR file from build
-COPY --from=build /app/target/pop-analysis-1.0-SNAPSHOT-jar-with-dependencies.jar pop-analysis.jar
+COPY --from=build /app/pop-analysis.jar pop-analysis.jar
 COPY docker/rebuild_private_key.sh .
 COPY docker/entrypoint.sh .
 
