@@ -2,8 +2,10 @@ package org.example.analysis;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.example.Config;
 
@@ -11,7 +13,8 @@ import com.github.jamesross03.pop_parser.RecordParser;
 import com.github.jamesross03.pop_parser.utils.Record;
 import com.opencsv.exceptions.CsvValidationException;
 
-import uk.ac.standrews.cs.data.umea.io.PrintUmeaBirthRecordsSample;
+import uk.ac.standrews.cs.data.umea.UmeaBirthsDataSet;
+import uk.ac.standrews.cs.utilities.dataset.DataSet;
 
 /**
  * Main class for Pop-Analysis.
@@ -31,9 +34,7 @@ public class Analysis {
 
             System.out.println("Running analysis with " + Paths.get(configFilepath).toAbsolutePath());
 
-            new PrintUmeaBirthRecordsSample().run();
-            // TODO: Uncomment this
-            //runUmeaAnalysis(c, (Class<Record>)c.getRecordType());
+            runUmeaAnalysis(c, (Class<Record>)c.getRecordType());
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
@@ -52,7 +53,12 @@ public class Analysis {
      */
     private static <T extends Record> void runUmeaAnalysis(Config config, Class<T> type) throws CsvValidationException, IOException {
         RecordParser<T> parser = new RecordParser<T>(type, config.getRecordFormat());
-        List<T> records = parser.parse(config.getRecordsFilepath());
+
+        StringWriter writer = new StringWriter();
+        new UmeaBirthsDataSet().print(writer); // writes CSV with headers and rows
+        Stream<String> csvStream = writer.toString().lines();
+        
+        List<T> records = parser.parse(csvStream);
 
         FreqTable<T> table = new FreqTable(config);
         table.add(records);
