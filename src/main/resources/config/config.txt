@@ -1,6 +1,9 @@
 # Example default config
 
 ## Required Parameters
+# Note: Records_location overridden to UMEA JAR
 records_location = ./src/main/resources/inputs/TD_5k/birth_records.csv
-record_format = TD
+# ------------
+
+record_format = UMEA
 record_type = BIRTH

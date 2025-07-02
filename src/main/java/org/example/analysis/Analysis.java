@@ -11,6 +11,8 @@ import com.github.jamesross03.pop_parser.RecordParser;
 import com.github.jamesross03.pop_parser.utils.Record;
 import com.opencsv.exceptions.CsvValidationException;
 
+import uk.ac.standrews.cs.data.umea.io.PrintUmeaBirthRecordsSample;
+
 /**
  * Main class for Pop-Analysis.
  */
@@ -28,7 +30,10 @@ public class Analysis {
             new File(c.getOutputDir()+"/tables").mkdirs();
 
             System.out.println("Running analysis with " + Paths.get(configFilepath).toAbsolutePath());
-            runAnalysis(c, (Class<Record>)c.getRecordType());
+
+            new PrintUmeaBirthRecordsSample().run();
+            // TODO: Uncomment this
+            //runUmeaAnalysis(c, (Class<Record>)c.getRecordType());
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
@@ -45,7 +50,7 @@ public class Analysis {
      * @throws CsvValidationException
      * @throws IOException
      */
-    private static <T extends Record> void runAnalysis(Config config, Class<T> type) throws CsvValidationException, IOException {
+    private static <T extends Record> void runUmeaAnalysis(Config config, Class<T> type) throws CsvValidationException, IOException {
         RecordParser<T> parser = new RecordParser<T>(type, config.getRecordFormat());
         List<T> records = parser.parse(config.getRecordsFilepath());
 

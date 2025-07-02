@@ -68,6 +68,13 @@
             <version>1.0.0</version>
         </dependency>
 
+        <!-- Local package dependency (UMEA JAR)-->
+        <dependency>
+            <groupId>uk.ac.standrews.cs</groupId>
+            <artifactId>data-umea</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <!-- GitHub Packages Dependency -->
         <dependency>
             <groupId>com.github.jamesross03</groupId>

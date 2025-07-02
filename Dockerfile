@@ -7,6 +7,15 @@ WORKDIR /app
 # Add authentication settings for GitHub Packages
 COPY settings.xml /root/.m2/settings.xml
 
+# Copy and install UMEA data JAR
+COPY data-umea-1.0-SNAPSHOT-jar-with-dependencies.jar .
+RUN mvn install:install-file \
+  -Dfile=data-umea-1.0-SNAPSHOT-jar-with-dependencies.jar \
+  -DgroupId=uk.ac.standrews.cs \
+  -DartifactId=data-umea \
+  -Dversion=1.0-SNAPSHOT \
+  -Dpackaging=jar
+
 # Copy pom.xml and download dependencies (cache layers)
 COPY pom.xml .
 RUN mvn dependency:go-offline
