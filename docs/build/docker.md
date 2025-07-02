@@ -32,7 +32,7 @@ As the application requires dependencies which are hosted on Github packages, yo
 To generate a Github token, go to [github.com/settings/tokens](https://github.com/settings/tokens) and generate a new token with read permissions for public repositories.
 
 ### 2.3. Building the image
-Navigate into the repository installed in the previous step ([2.1](#21-installing-the-source)) and run the following command to build the Docker image:
+Navigate into the repository installed in step ([2.1](#21-installing-the-source)) and run the following command to build the Docker image:
 
 ```sh
 # In a terminal (Windows/MacOs/Linux)

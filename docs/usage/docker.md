@@ -55,7 +55,7 @@ To run Pop-analysis using the default configuration file (which makes use of the
     - To receive the results
     - Note: Local directory `./results` must be created prior to execution
 
-Navigate to the root of the installed repository and run the following commands to bind these and run Pop-analysis:
+Navigate to the root of the repository installed in step ([2.1](#21-installing-the-source)) and run the following commands to bind these and run Pop-analysis:
 
 ```sh
 # If './results' doesn't yet exist
