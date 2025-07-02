@@ -20,7 +20,7 @@ public class Analysis {
     @SuppressWarnings("unchecked")
     public static void main(String[] args) throws Exception {
         if (args.length < 1) {
-            System.out.println("No config file given as CLI arg \nExpected usage: pop-analysis <config-filepath>");
+            System.out.println("No config file given as CLI arg \nExpected usage: pop-analysis-umea <config-filepath>");
             return;
         }
     
