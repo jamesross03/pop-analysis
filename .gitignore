@@ -8,3 +8,4 @@ results
 src/main/resources/inputs/synthetic_3k
 src/main/resources/inputs/synthetic_3k_corrupt
 settings.xml
+data-umea-*.jar
