@@ -205,7 +205,7 @@ public class Config {
     @Override
     public String toString() {
         return new StringBuilder()
-            .append("Input filepath = " + this.recordsFilepath)
+            .append("Input filepath = UMEA")
             .append("\nRecord format = " + this.recordFormat)
             .append("\nRecord type = " + this.recordType)
             .append("\nAnalysis type = " + this.analysisType)
