@@ -44,7 +44,8 @@ public class Analysis {
 
     /**
      * Runs analysis with the provided Config object and Record Type, where T
-     * is the Record type class (e.g BirthRecord).
+     * is the Record type class (e.g BirthRecord), and record file input is
+     * overridden to point to UMEA jar.
      * 
      * @param config Config object to use
      * @param type Record type being read (e.g birth, marriage, death)
@@ -53,9 +54,14 @@ public class Analysis {
      */
     private static <T extends Record> void runUmeaAnalysis(Config config, Class<T> type) throws CsvValidationException, IOException {
         RecordParser<T> parser = new RecordParser<T>(type, config.getRecordFormat());
-
         StringWriter writer = new StringWriter();
-        new UmeaBirthsDataSet().print(writer); // writes CSV with headers and rows
+        
+        DataSet dataset = switch(type.getSimpleName()) {
+            case "BirthRecord" -> new UmeaBirthsDataSet();
+            default -> throw new IllegalArgumentException("Unsupported record type: " + type);
+        };
+
+        dataset.print(writer); // writes CSV with headers and rows
         Stream<String> csvStream = writer.toString().lines();
         
         List<T> records = parser.parse(csvStream);
