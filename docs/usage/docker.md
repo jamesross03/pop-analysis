@@ -4,7 +4,7 @@ This guide will provide a simple walkthrough of how to run the Pop-analysis appl
 ## 1. Prerequisites
 The following tools must be installed on your system to follow this guide:
 - [Git](https://git-scm.com/)
-- [Docker](https://www.oracle.com/uk/java/)
+- [Docker](https://www.docker.com/), [Podman](https://podman.io/) or any other container management tool
 
 ## 2. Installation
 To run Pop-analysis with Docker, you only need the Docker image. However in this guide, we will be running Pop-analysis with sample configuration files and test-data, which needs to be installed separately.
@@ -18,7 +18,7 @@ To install the latest Pop-analysis image, run the following command:
 docker pull ghcr.io/jamesross03/pop-analysis:main
 ```
 
-To verify that the JAR file is working, navigate to the directory it is in and run the following command:
+To verify that the Docker image is successfully installed, run:
 
 ```sh
 # In a terminal (Windows/MacOs/Linux)
@@ -26,7 +26,7 @@ To verify that the JAR file is working, navigate to the directory it is in and r
 docker run ghcr.io/jamesross03/pop-analysis:main
 ```
 
-which should print the following message
+which should print the following message:
 
 ```txt
 No config file given as CLI arg 
@@ -55,7 +55,8 @@ To run Pop-analysis using the default configuration file (which makes use of the
     - To receive the results
     - Note: Local directory `./results` must be created prior to execution
 
-Navigate to the root of the installed repository and run the following commands to bind these and run Pop-analysis:
+Navigate to the root of the repository installed in step ([2.1](#21-installing-the-source)) and run the following commands to bind these and run Pop-analysis:
+
 ```sh
 # If './results' doesn't yet exist
 mkdir results

@@ -201,4 +201,15 @@ public class Config {
     public String getOutputDir() {
         return outputDir;
     }
+
+    @Override
+    public String toString() {
+        return new StringBuilder()
+            .append("Input filepath = " + this.recordsFilepath)
+            .append("\nRecord format = " + this.recordFormat)
+            .append("\nRecord type = " + this.recordType)
+            .append("\nAnalysis type = " + this.analysisType)
+            .append("\nPurpose = " + this.purpose)
+            .toString();
+    }
 }
