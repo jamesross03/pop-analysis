@@ -1,7 +1,7 @@
 # Pop-analysis
 Pop-analysis is a basic deployable containerised application for population data analysis, designed as a test for future population-linkage experiments. The focus of this is to create a portable image which can be easily deployed on a secure system and pointed towards a population dataset, with minimal setup.
 
-For more in-depth information, see [documentation](./docs/index.md).
+For more in-depth information, see [documentation](https://jamesross03.github.io/pop-analysis/).
 
 ## Running Pop-analysis
 Pop-analysis can be run from either a JAR file or a Docker container. Basic instructions for these can be found below, for more detailed instructions (including how to securely load private keys into the application), see the [usage guides](docs/usage/index.md). Additionally to build your own JAR files or docker images from the source code, see the [build guides](docs/build/index.md), and for configuration options, see the [configuration guide](docs/config/index.md).

@@ -71,3 +71,5 @@ This feature was developed with a focus on security, avoiding ever having to wri
 2. **Be aware of other users on the machine** - while the above flag ensures records of the container aren't stored after runtime, this method is still susceptible to snooping from other users during execution, either via accessing the docker container logs or through using `proc` or other similar system tools.
 3. **Command history** - be aware that if other users have access to your terminal history, they may be able to find your 'docker run' command and extract your private key. Thus it is recommended to clear your terminal history after use:
     - Running `history -c` to clear your session history is insufficient, you should also delete the persistent cross-session history file for your terminal (location varies depending on terminal, e.g `~/.bash_history` or `~/.zsh_history`).
+
+If you are trust the file system on the machine enough to install your private key and mount the .ssh directory into the container instead (using `-v ~/.ssh:/root/.ssh`), this would a more secure approach.
