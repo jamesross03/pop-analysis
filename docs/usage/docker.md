@@ -33,7 +33,7 @@ No config file given as CLI arg
 Expected usage: pop-analysis <config-filepath>
 ```
 
-### 2.2. Installing sample resources
+### 2.1. Installing sample resources
 We will use the sample resources from the [Pop-analysis repository](https://github.com/jamesross03/pop-analysis). To install this, run the following command:
 
 ```sh
